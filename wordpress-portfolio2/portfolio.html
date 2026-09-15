@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex Rivera — Mobile App Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#151824;
+    --ink-soft:#1E2233;
+    --paper:#F3EFE6;
+    --paper-dim:#DAD5C7;
+    --slate:#9599AC;
+    --cobalt:#3B5BFF;
+    --coral:#E8876A;
+    --line: rgba(243,239,230,0.12);
+    --maxw: 1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(21,24,36,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:20px;
+    padding-bottom:20px;
+  }
+  .brand{
+    font-family:'Fraunces', serif;
+    font-size:1.15rem;
+  }
+  .navlinks{
+    display:flex;
+    gap:32px;
+    font-size:0.95rem;
+    color:var(--slate);
+  }
+  .navlinks a{
+    text-decoration:none;
+    transition:color .2s ease;
+  }
+  .navlinks a:hover{color:var(--paper);}
+  .navcta{
+    background:var(--cobalt);
+    color:var(--paper);
+    padding:10px 20px;
+    border-radius:6px;
+    text-decoration:none;
+    font-size:0.92rem;
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .navtoggle{display:none;background:none;border:none;color:var(--paper);font-size:1.5rem;cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:110px 0 90px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    color:var(--coral);
+    font-size:0.95rem;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:3.4rem;
+    line-height:1.08;
+    max-width:14ch;
+  }
+  .hero p.lede{
+    margin-top:24px;
+    font-size:1.15rem;
+    color:var(--slate);
+    max-width:46ch;
+  }
+  .hero-ctas{
+    margin-top:36px;
+    display:flex;
+    gap:16px;
+  }
+  .btn{
+    display:inline-block;
+    padding:14px 26px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:500;
+    font-size:0.98rem;
+  }
+  .btn-primary{background:var(--cobalt);color:var(--paper);}
+  .btn-ghost{border:1px solid var(--line);color:var(--paper);}
+
+  .stat-row{
+    margin-top:56px;
+    display:flex;
+    gap:44px;
+    border-top:1px solid var(--line);
+    padding-top:28px;
+  }
+  .stat b{
+    font-family:'Fraunces', serif;
+    font-size:1.9rem;
+    display:block;
+  }
+  .stat span{
+    color:var(--slate);
+    font-size:0.88rem;
+  }
+
+  /* ---------- PHONE MOCKUP (recurring device) ---------- */
+  .phone{
+    width:230px;
+    height:470px;
+    margin:0 auto;
+    border-radius:34px;
+    background:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:14px;
+    position:relative;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,0.6);
+  }
+  .phone::before{
+    content:'';
+    position:absolute;
+    top:14px;
+    left:50%;
+    transform:translateX(-50%);
+    width:70px;
+    height:8px;
+    border-radius:6px;
+    background:rgba(0,0,0,0.4);
+  }
+  .phone-screen{
+    width:100%;
+    height:100%;
+    border-radius:22px;
+    overflow:hidden;
+    position:relative;
+    background:linear-gradient(160deg, #1B2032, #12141E);
+  }
+  .screen-bar{
+    display:flex;
+    justify-content:space-between;
+    padding:16px 18px 0;
+    font-size:0.7rem;
+    color:var(--slate);
+  }
+  .screen-block{
+    margin:18px 18px 0;
+    border-radius:10px;
+  }
+  .screen-block.tall{height:120px;}
+  .screen-block.row{height:52px;display:flex;align-items:center;padding:0 14px;gap:10px;}
+  .dot{width:30px;height:30px;border-radius:50%;flex-shrink:0;}
+  .bar{flex:1;height:8px;border-radius:4px;}
+
+  /* ---------- SECTION HEADS ---------- */
+  section{padding:90px 0;border-bottom:1px solid var(--line);}
+  .section-head{
+    display:grid;
+    grid-template-columns:1fr 1.6fr;
+    gap:48px;
+    margin-bottom:52px;
+  }
+  .section-head h2{font-size:2.1rem;}
+  .section-head p{color:var(--slate);max-width:52ch;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .about-grid p{margin-bottom:18px;color:var(--paper-dim);}
+  .skills-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px 24px;
+  }
+  .skills-list li{
+    border-top:1px solid var(--line);
+    padding:12px 0;
+    display:flex;
+    justify-content:space-between;
+    font-size:0.95rem;
+  }
+  .skills-list li span{color:var(--slate);font-size:0.85rem;}
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{border-top:1px solid var(--line);}
+  .tl-item{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:32px;
+    padding:32px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .tl-item .years{color:var(--coral);font-size:0.92rem;}
+  .tl-item h3{font-size:1.25rem;margin-bottom:6px;}
+  .tl-item .role-meta{color:var(--slate);font-size:0.9rem;margin-bottom:14px;}
+  .tl-item p{color:var(--paper-dim);max-width:60ch;}
+
+  /* ---------- PROJECTS ---------- */
+  .project{
+    display:grid;
+    grid-template-columns:230px 1fr;
+    gap:56px;
+    padding:56px 0;
+    border-bottom:1px solid var(--line);
+    align-items:center;
+  }
+  .project:last-child{border-bottom:none;}
+  .project.reverse{grid-template-columns:1fr 230px;}
+  .project.reverse .phone{order:2;}
+  .project-tag{color:var(--coral);font-size:0.88rem;margin-bottom:10px;}
+  .project h3{font-size:1.6rem;margin-bottom:14px;}
+  .project p{color:var(--paper-dim);max-width:56ch;margin-bottom:20px;}
+  .tech-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .tech-row span{
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:6px 14px;
+    font-size:0.82rem;
+    color:var(--slate);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    padding:100px 0;
+    border-bottom:none;
+  }
+  .contact-inner{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:48px;
+    align-items:end;
+  }
+  .contact h2{font-size:2.6rem;max-width:14ch;}
+  .contact-links{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
+  .contact-links a{
+    text-decoration:none;
+    font-size:1.1rem;
+    border-bottom:1px solid var(--line);
+    padding-bottom:4px;
+  }
+  footer{
+    padding:28px 0;
+    color:var(--slate);
+    font-size:0.85rem;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  @media (max-width:860px){
+    .navlinks{display:none;}
+    .navtoggle{display:block;}
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero h1{font-size:2.5rem;max-width:none;}
+    .about-grid{grid-template-columns:1fr;}
+    .skills-list{grid-template-columns:1fr;}
+    .tl-item{grid-template-columns:1fr;gap:8px;}
+    .project, .project.reverse{grid-template-columns:1fr;}
+    .project.reverse .phone{order:0;}
+    .phone{width:190px;height:390px;}
+    .section-head{grid-template-columns:1fr;}
+    .contact-inner{grid-template-columns:1fr;}
+    .contact h2{max-width:none;}
+    .stat-row{flex-wrap:wrap;gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">Alex Rivera</div>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="navcta" href="#contact">Start a project</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Mobile app developer, React Native</div>
+      <h1>Five years turning ideas into apps people actually keep on their phones.</h1>
+      <p class="lede">I design and build cross-platform mobile products end to end — from the first wireframe to a shipped App Store listing — using React Native, TypeScript, and native modules where it counts.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#work">See the work</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>5 yrs</b><span>Building mobile apps</span></div>
+        <div class="stat"><b>14</b><span>Apps shipped to production</span></div>
+        <div class="stat"><b>2.1M+</b><span>Combined installs</span></div>
+      </div>
+    </div>
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="screen-bar"><span>9:41</span><span>●●●</span></div>
+        <div class="screen-block tall" style="background:linear-gradient(135deg, var(--cobalt), #6C7BFF);"></div>
+        <div class="screen-block row" style="background:rgba(243,239,230,0.05);">
+          <div class="dot" style="background:var(--coral);"></div>
+          <div style="flex:1;">
+            <div class="bar" style="width:70%;background:rgba(243,239,230,0.3);margin-bottom:8px;"></div>
+            <div class="bar" style="width:40%;background:rgba(243,239,230,0.15);"></div>
+          </div>
+        </div>
+        <div class="screen-block row" style="background:rgba(243,239,230,0.05);">
+          <div class="dot" style="background:var(--slate);"></div>
+          <div style="flex:1;">
+            <div class="bar" style="width:55%;background:rgba(243,239,230,0.3);margin-bottom:8px;"></div>
+            <div class="bar" style="width:30%;background:rgba(243,239,230,0.15);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>About</h2>
+      <p>What five years of shipping React Native apps has actually taught me.</p>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I started building mobile apps back when React Native still felt like an experiment. Five years and a couple dozen releases later, it's the tool I trust most for getting a product from idea to both app stores without doubling the team.</p>
+        <p>I care most about the parts users never think about: launch time, list scrolling that doesn't stutter, and a build pipeline that doesn't break the week before a release. I've worked solo on early-stage apps and inside larger teams shipping to millions of users, and I like the handoff between those two worlds — moving fast without leaving a mess for whoever scales it next.</p>
+        <p>Outside of React Native, I dip into native Swift and Kotlin when a feature genuinely needs it, and I've picked up enough backend and DevOps to not be helpless without one.</p>
+      </div>
+      <ul class="skills-list">
+        <li>React Native & Expo <span>Core</span></li>
+        <li>TypeScript <span>Core</span></li>
+        <li>Redux / Zustand <span>State</span></li>
+        <li>React Navigation <span>Core</span></li>
+        <li>Reanimated & Gesture Handler <span>Interaction</span></li>
+        <li>Native Modules (Swift / Kotlin) <span>Native</span></li>
+        <li>Firebase & Supabase <span>Backend</span></li>
+        <li>Jest & Detox <span>Testing</span></li>
+        <li>Fastlane & EAS <span>CI/CD</span></li>
+        <li>App Store & Play Console <span>Release</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Experience</h2>
+      <p>Five years across two teams and one long stretch of independent work.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="years">2024 — Present</div>
+        <div>
+          <h3>Senior Mobile Engineer</h3>
+          <div class="role-meta">Northlane · Full-time</div>
+          <p>Own the React Native codebase for a fintech app used by 400K+ people. Led the migration to the New Architecture, cut cold-start time by 38%, and mentor two junior mobile engineers.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="years">2022 — 2024</div>
+        <div>
+          <h3>Mobile App Developer</h3>
+          <div class="role-meta">Fielwork Labs · Full-time</div>
+          <p>Built two consumer apps from scratch through to launch, handling everything from navigation architecture to App Store submission and post-launch crash triage.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="years">2021 — 2022</div>
+        <div>
+          <h3>Freelance React Native Developer</h3>
+          <div class="role-meta">Independent · Contract</div>
+          <p>Delivered MVP apps for five early-stage startups, working directly with founders on scope, timelines, and the trade-offs of shipping fast on a small budget.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <p>A few projects that show the range — from a fintech rebuild to a small-team MVP.</p>
+    </div>
+
+    <div class="project">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-bar"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-block tall" style="background:linear-gradient(135deg, #2A2F45, #1B2032);"></div>
+          <div class="screen-block row" style="background:rgba(243,239,230,0.05);">
+            <div class="dot" style="background:var(--cobalt);"></div>
+            <div style="flex:1;"><div class="bar" style="width:60%;background:rgba(243,239,230,0.3);"></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="project-tag">Fintech · New Architecture migration</div>
+        <h3>Northlane Wallet</h3>
+        <p>Rebuilt the core transaction flow of a 400K-user fintech app on React Native's New Architecture, moving heavy list rendering to Fabric and replacing a slow bridge-based native module with TurboModules. Cold start dropped from 2.9s to 1.8s.</p>
+        <div class="tech-row">
+          <span>React Native</span><span>TypeScript</span><span>Fabric / TurboModules</span><span>Reanimated</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project reverse">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-bar"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-block tall" style="background:linear-gradient(135deg, var(--coral), #C15F45);"></div>
+          <div class="screen-block row" style="background:rgba(243,239,230,0.05);">
+            <div class="dot" style="background:var(--coral);"></div>
+            <div style="flex:1;"><div class="bar" style="width:45%;background:rgba(243,239,230,0.3);"></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="project-tag">Consumer · 0 to 1</div>
+        <h3>Fieldnote</h3>
+        <p>Designed and built a journaling app for outdoor workers from an empty repo to a public launch in nine weeks — offline-first sync, camera integration, and a custom native module for GPS tagging that the JS bridge couldn't handle fast enough.</p>
+        <div class="tech-row">
+          <span>React Native</span><span>Expo</span><span>SQLite</span><span>Native Modules</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-bar"><span>9:41</span><span>●●●</span></div>
+          <div class="screen-block tall" style="background:linear-gradient(135deg, #3F4E8C, #24304F);"></div>
+          <div class="screen-block row" style="background:rgba(243,239,230,0.05);">
+            <div class="dot" style="background:var(--slate);"></div>
+            <div style="flex:1;"><div class="bar" style="width:50%;background:rgba(243,239,230,0.3);"></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="project-tag">Marketplace · Contract</div>
+        <h3>Loopyard</h3>
+        <p>Built the buyer-side app for a peer-to-peer equipment rental marketplace as a solo contractor, including real-time chat, in-app payments through Stripe, and a review system — taken from founder sketches to a Play Store launch in four months.</p>
+        <div class="tech-row">
+          <span>React Native</span><span>Zustand</span><span>Stripe</span><span>Firebase</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="contact" id="contact" style="border-bottom:none;">
+  <div class="wrap contact-inner">
+    <h2>Have an app that needs building?</h2>
+    <div class="contact-links">
+      <a href="mailto:hello@alexrivera.dev">hello@alexrivera.dev</a>
+      <a href="#">github.com/alexrivera</a>
+      <a href="#">linkedin.com/in/alexrivera</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© 2026 Alex Rivera</span>
+  <span>Based in Austin, TX · Available for remote work</span>
+</footer>
+
+</body>
+</html>
